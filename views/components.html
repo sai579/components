@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .renderjson a {
+            text-decoration: none;
+        }
+
+        .renderjson .disclosure {
+            color: crimson;
+            font-size: 150%;
+        }
+
+        .renderjson .syntax {
+            color: grey;
+        }
+
+        .renderjson .string {
+            color: darkred;
+        }
+
+        .renderjson .number {
+            color: darkcyan;
+        }
+
+        .renderjson .boolean {
+            color: blueviolet;
+        }
+
+        .renderjson .key {
+            color: darkblue;
+        }
+
+        .renderjson .keyword {
+            color: blue;
+        }
+
+        .renderjson .object.syntax {
+            color: lightseagreen;
+        }
+
+        .renderjson .array.syntax {
+            color: orange;
+        }
+    </style>
+    <title>Display Dependency graph of Components</title>
+</head>
+
+<body>
+    <p>Click below to display Dependency graph of Components</p>
+
+    <div id="dest"></div>
+
+    <script type="text/javascript" src="renderjson.js"></script>
+
+    <button id="submit" type="submit" class="btn btn-primary"
+        onclick="this.style.visibility='hidden'; getComponents()">List Components</button>
+
+    <script>
+        function getComponents() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "components.json");
+            xhr.addEventListener('load', processJSON);
+            xhr.send();
+
+            function processJSON(event) {
+                let json = this.responseText;
+                let obj = JSON.parse(json);
+                document.getElementById("dest").appendChild(renderjson.set_show_to_level(1).set_max_string_length()(obj));
+            }
+        }
+    </script>
+
+</body>
+
+</html>
