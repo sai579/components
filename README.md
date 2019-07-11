@@ -1,5 +1,8 @@
 # components
 
-# Run server
 
+# Install dependencies
+npm install
+
+# Run server
 npm start
